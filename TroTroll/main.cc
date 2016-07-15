@@ -1,12 +1,24 @@
+/*
+ * C++
+ * main.cc
+ *
+ * 15 Juillet 2016
+ *
+ * Server (ordi infecté)
+ *
+ */
+/* C++ headers */
+#include <iostream>
+/* C headers */
 #include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
 #include <stdlib.h>
-
+/* Defines */
 #define BUF_SIZE 1024
-// Server (ordi infecté)
+/* Internal headers */
 
 int main( int argc, char** argv )
 {
@@ -16,10 +28,10 @@ int main( int argc, char** argv )
     }
     int udpSocket, nBytes;
     char buffer[BUF_SIZE];
-    struct sockaddr_in serverAddr, clientAddr;
+    struct sockaddr_in serverAddr/*, clientAddr*/;
     struct sockaddr_storage serverStorage;
     socklen_t addr_size;
-    int i, portNum = atoi(argv[1]);
+    int portNum = atoi(argv[1]);
 
     /* Create UDP socket */
     udpSocket = socket(PF_INET, SOCK_DGRAM, 0);
