@@ -8,6 +8,7 @@
 #include <arpa/inet.h>
 #include <QMainWindow>
 #include <QDebug>
+#include <QString>
 
 #define BUF_SIZE 1024
 
@@ -22,8 +23,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void doSettings( char* address, int port );
-    void doSend( char* message );
     int clientSocket;
     int portNum;
     int nBytes;
@@ -33,6 +32,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    void doConnect();
+    void doSend();
 };
 
 #endif // MAINWINDOW_H

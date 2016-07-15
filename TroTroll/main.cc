@@ -23,7 +23,7 @@
 int main( int argc, char** argv )
 {
     if( argc != 2 ) {
-        fprintf(stderr, "Usage: %s <port>", argv[0]);
+        fprintf(stderr, "Usage: %s <port>\n", argv[0]);
         exit(1);
     }
     int udpSocket, nBytes;
@@ -53,9 +53,11 @@ int main( int argc, char** argv )
         /* Try to receive any incoming UDP datagram. Address and port of
           requesting client will be stored on serverStorage variable */
         nBytes = recvfrom( udpSocket, buffer, BUF_SIZE, 0, (struct sockaddr *) &serverStorage, &addr_size );
+        printf("Message: %s\n", buffer);
+        memset( buffer, '\0', BUF_SIZE );
 
-        /* Send uppercase message back to client, using serverStorage as the address */
-        sendto( udpSocket, "OK", nBytes, 0, (struct sockaddr *) &serverStorage, addr_size );
+        /* Send to client, using serverStorage as the address */
+        sendto( udpSocket, "OK", BUF_SIZE, 0, (struct sockaddr *) &serverStorage, addr_size );
     }
 
     return 0;
