@@ -11,6 +11,7 @@
 #include <iostream>
 /* C headers */
 #include <stdio.h>
+#include <assert.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -47,13 +48,18 @@ int main( int argc, char** argv )
 
     /* Initialize size variable to be used later on */
     addr_size = sizeof serverStorage;
+    memset( buffer, '\0', BUF_SIZE );
 
     while( 1 )
     {
+        printf("Waiting for data...\n");
+        fflush(stdout);
         /* Try to receive any incoming UDP datagram. Address and port of
           requesting client will be stored on serverStorage variable */
         nBytes = recvfrom( udpSocket, buffer, BUF_SIZE, 0, (struct sockaddr *) &serverStorage, &addr_size );
-        printf("Message: %s\n", buffer);
+        assert( nBytes != -1 );
+        printf("Received packet from %s:%d (%d bytes)\n", inet_ntoa(serverAddr.sin_addr), ntohs(serverAddr.sin_port), nBytes);
+        printf("Data: %s\n" , buffer);
         memset( buffer, '\0', BUF_SIZE );
 
         /* Send to client, using serverStorage as the address */

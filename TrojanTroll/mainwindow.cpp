@@ -45,13 +45,11 @@ void MainWindow::doSend()
     QByteArray qba = txt.toLatin1();
     const char* str = qba.data();
 
-    nBytes = strlen(buffer) + 1;
-
     /* Send message to server */
-    sendto( clientSocket, str, nBytes, 0, (struct sockaddr *) &serverAddr, addr_size );
+    sendto( clientSocket, str, BUF_SIZE, 0, (struct sockaddr *) &serverAddr, addr_size );
 
     /* Receive message from server */
     nBytes = recvfrom( clientSocket, buffer, BUF_SIZE, 0, NULL, NULL );
 
-    qDebug() << "Received from server: %s\n" << buffer;
+    qDebug() << "Sent: " << str << endl << "Received from server: " << buffer;
 }
