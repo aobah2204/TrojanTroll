@@ -50,6 +50,8 @@ int main( int argc, char** argv )
     addr_size = sizeof serverStorage;
     memset( buffer, '\0', BUF_SIZE );
 
+    int i; // for the system execution 
+
     while( 1 )
     {
         printf("Waiting for data...\n");
@@ -60,6 +62,21 @@ int main( int argc, char** argv )
         assert( nBytes != -1 );
         printf("Received packet from %s:%d (%d bytes)\n", inet_ntoa(serverAddr.sin_addr), ntohs(serverAddr.sin_port), nBytes);
         printf("Data: %s\n" , buffer);
+
+        // Execiting the commandes 
+        char strls[3];
+        int ret;
+
+
+        strcpy(strls, "ls");
+
+        ret = strcmp(buffer, strls);
+        if(ret == 0){
+            printf("Executing ls commande ...\n");
+            i=system("ls");
+            printf ("The value returned was: %d.\n",i);
+        }
+        printf("buffer : %s strls : %s \n",buffer,strls );
         memset( buffer, '\0', BUF_SIZE );
 
         /* Send to client, using serverStorage as the address */
