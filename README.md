@@ -12,3 +12,7 @@ Voici sur quoi on pourrait commencer:
 ### Update: Vendredi 15 Juillet 2016
 
 J'ai réussi à connecter les deux (server/client), on peut désormais envoyer des messages entre les deux.
+
+### Update: Dimanche 17 Juillet 2016
+
+On peut désormais envoyer des commandes entre les deux. Ce qui serait bien là ça serait de faire une interfce qui ouvre un terminal en mode invité de commande et qui affiche ça comme un shell.
