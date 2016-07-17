@@ -11,4 +11,4 @@ Voici sur quoi on pourrait commencer:
 
 ### Update: Vendredi 15 Juillet 2016
 
-J'ai réussi à connecter les deux (server/client) mais je sais pas pourquoi il y a que 3 characrères max qui passent et qui s'affichent. TODO!
+J'ai réussi à connecter les deux (server/client), on peut désormais envoyer des messages entre les deux.
