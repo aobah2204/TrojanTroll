@@ -53,3 +53,23 @@ void MainWindow::doSend()
 
     qDebug() << "Sent: " << str << endl << "Received from server: " << buffer;
 }
+
+void MainWindow::doSendCommand()
+{
+    QString requete = ui->lineEdit_4->text();
+    qDebug() << "REQUETE> " << requete;
+    /* Conversion de QString vers char* */
+    QByteArray qba = requete.toLatin1();
+    const char* str = qba.data();
+
+    if( sendto(clientSocket, str, strlen(str)+1, 0, (struct sockaddr *) &serverAddr, addr_size) < 0 ) {
+        perror("Envoi requete");
+        exit(1);
+    }
+
+    if( (longueur_reponse = recvfrom( clientSocket, buffer, BUF_SIZE, 0, NULL, NULL )) < 0 ) {
+        perror("Attente réponse");
+        exit(1);
+    }
+    qDebug() << "REPONSE> " << buffer;
+}

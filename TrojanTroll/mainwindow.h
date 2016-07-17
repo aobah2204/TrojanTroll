@@ -29,6 +29,7 @@ public:
     char buffer[BUF_SIZE];
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
+    int longueur_reponse;
 
 private:
     Ui::MainWindow *ui;
@@ -36,6 +37,7 @@ private:
 private slots:
     void doConnect();
     void doSend();
+    void doSendCommand();
 };
 
 #endif // MAINWINDOW_H

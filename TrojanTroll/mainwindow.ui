@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>304</width>
-    <height>334</height>
+    <width>302</width>
+    <height>403</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,7 +123,27 @@
          <property name="text">
           <string>Text to send:</string>
          </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
         </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="text">
+          <string>Send</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Cmd to send:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_4"/>
        </item>
       </layout>
      </widget>
@@ -135,7 +155,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>304</width>
+     <width>302</width>
      <height>22</height>
     </rect>
    </property>
@@ -164,7 +184,7 @@
      <y>183</y>
     </hint>
     <hint type="destinationlabel">
-     <x>410</x>
+     <x>301</x>
      <y>318</y>
     </hint>
    </hints>
@@ -181,7 +201,23 @@
     </hint>
     <hint type="destinationlabel">
      <x>256</x>
-     <y>411</y>
+     <y>402</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>doSendCommand()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>202</x>
+     <y>348</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>329</x>
+     <y>463</y>
     </hint>
    </hints>
   </connection>
@@ -189,5 +225,6 @@
  <slots>
   <slot>doConnect()</slot>
   <slot>doSend()</slot>
+  <slot>doSendCommand()</slot>
  </slots>
 </ui>
