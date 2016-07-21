@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>302</width>
-    <height>403</height>
+    <width>325</width>
+    <height>236</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>TrojanTroll — Client</string>
+   <string>Connect</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -28,6 +28,9 @@
          </property>
          <property name="maximum">
           <number>67000</number>
+         </property>
+         <property name="value">
+          <number>7777</number>
          </property>
         </widget>
        </item>
@@ -52,7 +55,11 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="text">
+          <string>127.0.0.1</string>
+         </property>
+        </widget>
        </item>
        <item row="3" column="1">
         <widget class="QPushButton" name="pushButton">
@@ -78,73 +85,6 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="connected_txt">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-           <underline>true</underline>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLabel { color: green; }</string>
-         </property>
-         <property name="text">
-          <string>Connected</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="title">
-       <string>Communication</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="1" column="1">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>Send</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_3"/>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Text to send:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="text">
-          <string>Send</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>Cmd to send:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_4"/>
-       </item>
       </layout>
      </widget>
     </item>
@@ -155,7 +95,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>302</width>
+     <width>325</width>
      <height>22</height>
     </rect>
    </property>
@@ -169,6 +109,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionNew_Terminal">
+   <property name="text">
+    <string>New Terminal</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
@@ -189,42 +134,11 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>pushButton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>doSend()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>196</x>
-     <y>278</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>256</x>
-     <y>402</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_3</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>doSendCommand()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>202</x>
-     <y>348</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>329</x>
-     <y>463</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
  <slots>
   <slot>doConnect()</slot>
   <slot>doSend()</slot>
   <slot>doSendCommand()</slot>
+  <slot>newTty()</slot>
  </slots>
 </ui>

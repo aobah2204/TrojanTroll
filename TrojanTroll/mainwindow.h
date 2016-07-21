@@ -9,6 +9,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QString>
+#include "mainwindowsession.h"
 
 #define BUF_SIZE 1024
 
@@ -33,11 +34,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    MainWindowSession *mws;
 
 private slots:
     void doConnect();
-    void doSend();
-    void doSendCommand();
 };
 
 #endif // MAINWINDOW_H
