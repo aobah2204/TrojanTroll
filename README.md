@@ -21,3 +21,10 @@ On peut désormais envoyer des commandes entre les deux. Ce qui serait bien là 
 
 J'ai refait l'interface client vite fait sous Qt. On peut maintenant se connecter:
 
+[Figure 1](fig1.png)
+
+Puis une nouvelle interface s'ouvre avec pas mal de choix à venir, plus une console interactive:
+
+[Figure 2](fig2.png)
+
+Il y a un problème avec la console mais je continuerai ça quand j'aurais le temps...
