@@ -23,8 +23,6 @@
 #include <unistd.h>
 /* Defines */
 #define BUF_SIZE 1024
-#define TAILLE_TAMPON 1000
-#define CMD "CMD_OK"
 /* Internal headers */
 
 int main( int argc, char** argv )
@@ -65,35 +63,60 @@ int main( int argc, char** argv )
           requesting client will be stored on serverStorage variable */
         nBytes = recvfrom( udpSocket, bufferRequest, BUF_SIZE, 0, (struct sockaddr *) &serverStorage, &addr_size );
         assert( nBytes != -1 );
-        printf("Received packet from %s:%d (%d bytes)\n", inet_ntoa(serverAddr.sin_addr), ntohs(serverAddr.sin_port), nBytes);
-        printf("Data: %s\n" , bufferRequest);
+        // printf("Received packet from %s:%d (%d bytes)\n", inet_ntoa(serverAddr.sin_addr), ntohs(serverAddr.sin_port), nBytes);
 
-        FILE *fp;
-
-        /* Open the command for reading. */
-        fp = popen(bufferRequest, "r+");
-        if (fp == NULL) {
-            printf("Failed to run command\n" );
-            exit(1);
+        int type = 0;
+        if( bufferRequest[0] == '1' && bufferRequest[1] == '_' ) {
+            memmove(bufferRequest, bufferRequest+2, strlen(bufferRequest));
+            type = 1;
+        }
+        else if( bufferRequest[0] == '2' && bufferRequest[1] == '_' ) {
+            memmove(bufferRequest, bufferRequest+2, strlen(bufferRequest));
+            type = 2;
         }
 
-        std::string output;
-        /* Read the output a line at a time - output it. */
-        while( fgets(bufferAnswer, BUF_SIZE, fp) != NULL ) {
-            output.append( bufferAnswer );
+        printf("[type:%s] Data: %s \n", (type==0)?"Unknown":((type==1)?"Message":"Command"), bufferRequest);
+
+        if( type == 0 ) {
+            printf("There is a problem. The received packet doesn't have (type=0).\n");
         }
-        const char *cstr = output.c_str();
+        else if( type == 1 ) {
+            printf("chat> %s\n", bufferRequest);
+            /* Send to client, using serverStorage as the address */
+            sendto( udpSocket, "OK", 3, 0, (struct sockaddr *) &serverStorage, addr_size );
+        }
+        else if( type == 2 ) {
+            FILE *fp;
 
-        /* close */
-        pclose(fp);
+            /* Open the command for reading. */
+            fp = popen(bufferRequest, "r+");
+            if (fp == NULL) {
+                printf("Failed to run command\n" );
+                exit(1);
+            }
 
-        puts(cstr);
+            std::string output;
+            /* Read the output a line at a time - output it. */
+            while( fgets(bufferAnswer, BUF_SIZE, fp) != NULL ) {
+                output.append( bufferAnswer );
+            }
+            const char *cstr = output.c_str();
 
-        memset( bufferRequest, '\0', BUF_SIZE );
-        memset( bufferAnswer, '\0', BUF_SIZE );
+            /* close */
+            pclose(fp);
 
-        /* Send to client, using serverStorage as the address */
-        sendto( udpSocket, cstr, BUF_SIZE, 0, (struct sockaddr *) &serverStorage, addr_size );
+            puts(cstr);
+
+            memset( bufferRequest, '\0', BUF_SIZE );
+            memset( bufferAnswer, '\0', BUF_SIZE );
+
+            /* Send to client, using serverStorage as the address */
+            sendto( udpSocket, cstr, BUF_SIZE, 0, (struct sockaddr *) &serverStorage, addr_size );
+        }
+        else {
+            printf("There is a problem. Can't understand the received packet (type=%d).\n", type);
+        }
+        
     }
 
     return 0;

@@ -38,11 +38,14 @@ void MainWindow::doConnect()
     ui->connected_txt->show();
 }
 
+/* Send Text : 1_ */
 void MainWindow::doSend()
 {
     QString txt = ui->lineEdit_3->text();
+    QString tmp = "1_";
+    tmp.append(txt);
     /* Conversion de QString vers char* */
-    QByteArray qba = txt.toLatin1();
+    QByteArray qba = tmp.toLatin1();
     const char* str = qba.data();
 
     /* Send message to server */
@@ -54,12 +57,14 @@ void MainWindow::doSend()
     qDebug() << "Sent: " << str << endl << "Received from server: " << buffer;
 }
 
+/* Send Command : 2_ */
 void MainWindow::doSendCommand()
 {
     QString requete = ui->lineEdit_4->text();
-    qDebug() << "REQUETE> " << requete;
+    QString tmp = "2_";
+    tmp.append(requete);
     /* Conversion de QString vers char* */
-    QByteArray qba = requete.toLatin1();
+    QByteArray qba = tmp.toLatin1();
     const char* str = qba.data();
 
     if( sendto(clientSocket, str, strlen(str)+1, 0, (struct sockaddr *) &serverAddr, addr_size) < 0 ) {
