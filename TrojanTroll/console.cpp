@@ -56,6 +56,12 @@ bool Console::eventFilter(QObject* _o, QEvent* _e)
 
             return true;
         }
+        else if(eventKey->key() == Qt::Key_Backspace)
+        {
+            QTextCursor cursor = ui->textEdit->textCursor();
+            if( cursor.positionInBlock() == 2 )
+                return true;
+        }
     }
     return QTextEdit::eventFilter(_o, _e);
 }
